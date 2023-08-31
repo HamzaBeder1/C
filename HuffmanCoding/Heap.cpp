@@ -1,15 +1,28 @@
-//
-// Created by Hamza Beder on 8/8/2023.
-//
+/**
+ * @file Heap.cpp
+ * 
+ * @brief This is the Heap that will be used to implement a Priority Queue.
+ * 
+ * @author Hamza Beder
+*/
 
 #include "Heap.h"
-#include <vector>
 using namespace std;
+
+/**
+ * Constructor for a HeapNode
+*/
 HeapNode:: HeapNode(){
         this->c = 0;
         this->freq = 0;
         this->left = this->right = nullptr;
 }
+
+/**
+ * Constructor for a HeapNode
+ * @param c This is the character in the file associated with the node
+ * @param freq This is the frequency of c
+*/
 
 HeapNode:: HeapNode(char c, int freq){
         this->c = c;
@@ -17,15 +30,20 @@ HeapNode:: HeapNode(char c, int freq){
         this->left = this->right = nullptr;
 }
 
-Heap:: Heap(){
-
-}
+/**
+ * Constructor for a Heap
+ * @param length This is the maximum capacity of the Heap.
+*/
 Heap:: Heap(int length){
     this->length = length;
     this->heap_size = 0;
     this->nodes = new HeapNode*[length];
 }
 
+/**
+ * This is a recursive function that maintains the min-heap property.
+ * @param idx Index of the node that will be checked in the current iteration.
+*/
 void Heap:: minHeapify(int idx){
     int smallest = idx;
     if(2*idx+1 < this->heap_size && this->nodes[2*idx+1]->freq < this->nodes[smallest]->freq)
